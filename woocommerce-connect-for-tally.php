@@ -118,11 +118,9 @@ function wootallyc_template_loader( $template ) {
 }
 
 
-/*
-  Setup the content for woocommerce
-------------------------------------------*/
-add_action('tally_template_init', 'wootallyc_template_content_reset');
-function wootallyc_template_content_reset(){
+add_action('wp_head', 'wootallyc_show_page_content');
+function wootallyc_show_page_content(){
+	/** Adding content to the pages */
 	if(is_single() && 'product' == get_post_type()){
 		remove_action('tally_loop', 'tally_do_loop_content');
 		add_action('tally_loop', 'wootallyc_do_single_template_content');
@@ -141,8 +139,9 @@ function wootallyc_template_content_reset(){
 			remove_action('tally_loop', 'tally_do_loop_content');
 			add_action('tally_loop', 'wootallyc_do_archive_template_content');
 		}
-	}
+	}	
 }
+
 
 
 
