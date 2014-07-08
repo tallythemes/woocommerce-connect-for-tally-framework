@@ -1,2 +1,0 @@
-Woocommerce Connect For Tally
-=============================

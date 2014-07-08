@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Woocommerce Connect For Tally Framework
+ * Plugin Name: Woocommerce Connect For <strong>Tally Framework</strong>
  * Plugin URI:  http://tallythemes.com/
- * Description: Add basic woocommercee templating and Style for Tally Theme framework
+ * Description: Add basic woocommercee templating and Style for  <strong> Tally Framework</strong>
  * Author:      TallyThemes
  * Author URI:  http://tallythemes.com/
  * Version:     1.0
