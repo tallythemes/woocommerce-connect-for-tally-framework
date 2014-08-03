@@ -1,10 +1,10 @@
 === Woocommerce Connect For Tally Framework ===
 Contributors: tallythemes
 Donate link: http://tallythemes.com/
-Tags: portfolio, faq, testimonials, slideshow, people, shortcodes, woocommerce, bbpress, buddypress, edd, cart66, doc, image gallery, logos, pricing table
+Tags: woocommerce, ecommerce, tallythemes, tally framework, woocommerce connect
 Requires at least: 3.8
 Tested up to: 3.9.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Please see [http://tallythemes.com/how-to-install-wordpress-plugin/](http://tall
 
 
 == Changelog ==
+= 1.2 =
+* Fix Sidebar: it was loading in all pages. Now it will load in Shop pages only.
+
 
 = 1.1 =
 * Improve the theme support

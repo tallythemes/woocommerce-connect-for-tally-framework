@@ -5,7 +5,7 @@
  * Description: Add basic woocommercee templating and Style for  <strong> Tally Framework</strong>
  * Author:      TallyThemes
  * Author URI:  http://tallythemes.com/
- * Version:     1.1
+ * Version:     1.2
  * Text Domain: woocommerce_connect_for_tally
  * Domain Path: /languages/
  * Name Space: wootallyc
@@ -22,7 +22,7 @@ define('WOOTALLYC', 'Woocommerce Connect For Tally Framework' );
 define('WOOTALLYC_URL', site_url(str_replace( $path_abs, '', $path_dir )) );
 define('WOOTALLYC_DRI', $path_dir );
 define('WOOTALLYC_TEMPLATE', WOOTALLYC_DRI.'woocommerce' );
-define('WOOTALLYC_VERSION', 1.1 );
+define('WOOTALLYC_VERSION', 1.2 );
 
 
 /*
@@ -73,8 +73,8 @@ function wootallyc_init_load(){
 		'before_title' => '<h4 class="heading">',
 		'after_title' => '</h4>',
 	));
-	remove_action( 'tally_sidebar', 'tally_do_sidebar' );
 	add_action( 'tally_sidebar', 'wootallyc_add_shop_sidebar' );
+	add_filter('tally_sidebar_active', 'wootallyc_disable_theme_sidebar');
 	
 	
 	/* Add Tally Framework's page metabox to the product page*/
@@ -87,17 +87,31 @@ function wootallyc_init_load(){
 	 Apply filter for the sidebar layout by theme options
 	--------------------------------*/
 	add_filter('tally_sitebar_layout_option', 'wootallyc_tally_sitebar_layout_option');
+	
 }
 
+
+/*
+ Disable deafult sidebar of the theme
+--------------------------------*/
+function wootallyc_disable_theme_sidebar($active){
+	if( (is_single() && 'product' == get_post_type()) || is_post_type_archive('product') || is_page(get_option('woocommerce_shop_page_id')) || is_tax('product_tag') || is_tax('product_cat')){
+		$active = false;
+	}
+	
+	return $active;
+}
 
 
 /*
  Adding Shop sidebar in the theme
 --------------------------------*/
 function wootallyc_add_shop_sidebar(){
-	if ( ! dynamic_sidebar( 'wooshop' ) && current_user_can( 'edit_theme_options' )  ) {
-		if(function_exists('tally_default_widget_area_content')){ tally_default_widget_area_content( __( 'WooCommerce Shop Sidebar Widget Area', 'tally_textdomain' ) ); };
-	}	
+	if( (is_single() && 'product' == get_post_type()) || is_post_type_archive('product') || is_page(get_option('woocommerce_shop_page_id')) || is_tax('product_tag') || is_tax('product_cat')){
+		if ( ! dynamic_sidebar( 'wooshop' ) && current_user_can( 'edit_theme_options' )  ) {
+			if(function_exists('tally_default_widget_area_content')){ tally_default_widget_area_content( __( 'WooCommerce Shop Sidebar Widget Area', 'tally_textdomain' ) ); };
+		}	
+	}
 }
 
 
