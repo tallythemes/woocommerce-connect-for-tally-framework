@@ -5,7 +5,7 @@
  * Description: Add basic woocommercee templating and Style for  <strong> Tally Framework</strong>
  * Author:      TallyThemes
  * Author URI:  http://tallythemes.com/
- * Version:     1.2
+ * Version:     1.3
  * Text Domain: woocommerce_connect_for_tally
  * Domain Path: /languages/
  * Name Space: wootallyc
@@ -22,7 +22,7 @@ define('WOOTALLYC', 'Woocommerce Connect For Tally Framework' );
 define('WOOTALLYC_URL', site_url(str_replace( $path_abs, '', $path_dir )) );
 define('WOOTALLYC_DRI', $path_dir );
 define('WOOTALLYC_TEMPLATE', WOOTALLYC_DRI.'woocommerce' );
-define('WOOTALLYC_VERSION', 1.2 );
+define('WOOTALLYC_VERSION', 1.3 );
 
 
 /*
@@ -88,6 +88,60 @@ function wootallyc_init_load(){
 	--------------------------------*/
 	add_filter('tally_sitebar_layout_option', 'wootallyc_tally_sitebar_layout_option');
 	
+	
+	// Remove each style one by one
+	add_filter( 'woocommerce_enqueue_styles', 'wootallyc_enqueue_styles_filter' );
+	
+	add_action( 'wp_enqueue_scripts', 'wootallyc_script_loader' );
+	
+	
+	/*-- Related Products --*/
+	remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+	add_action( 'woocommerce_after_single_product_summary', 'wootallyc_related_products', 20 );
+	
+	
+	
+}
+
+
+/*
+ Script Loader
+--------------------------------*/
+function wootallyc_enqueue_styles_filter($enqueue_styles){
+	
+	if( apply_filters('wootallyc_custom_css', false) == true ){
+		unset( $enqueue_styles['woocommerce-general'] );
+		unset( $enqueue_styles['woocommerce-layout'] );
+		unset( $enqueue_styles['woocommerce-smallscreen'] );
+	}
+	
+	return $enqueue_styles;
+}
+
+
+/*
+ Script Loader
+--------------------------------*/
+function wootallyc_script_loader(){
+	if( apply_filters('wootallyc_custom_css', false) == true ){
+		wp_enqueue_style( 'wootallyc-woocommerce', WOOTALLYC_URL . 'assets/css/woocommerce.css' );
+		wp_enqueue_style( 'wootallyc-woocommerce-layout', WOOTALLYC_URL . 'assets/css/woocommerce-layout.css' );
+		wp_enqueue_style( 'wootallyc-woocommerce-smallscreen', WOOTALLYC_URL . 'assets/css/woocommerce-smallscreen.css' );
+	}
+}
+
+
+/*
+ related products columns
+--------------------------------*/
+function wootallyc_related_products(){
+	
+	echo '<div class="wootallyc-related-product-'.tally_option('woocommerce_related_porduct_column').'">';
+	woocommerce_related_products(array( 
+		'posts_per_page' => tally_option('woocommerce_related_porduct_column'),
+		'columns'        => tally_option('woocommerce_related_porduct_column'), 
+	));
+	echo '</div>';
 }
 
 
@@ -123,7 +177,7 @@ function wootallyc_add_theme_option($custom_settings){
 	
 	$custom_settings['settings']['woocommerce_archive_sidebar_layout'] = array(
 		'id'          => 'woocommerce_archive_sidebar_layout',
-        'label'       => __('Default Sidebar Layout for Product Archive Page', 'tally_taxdomain'),
+        'label'       => __('Default Sidebar Layout for Product Archive Page', 'woocommerce_connect_for_tally'),
         'desc'        => __('This is the global sidebar layout for WooCommerce Product Archive Pages.', 'tally_taxdomain'),
         'std'         => tally_option_std('woocommerce_archive_sidebar_layout'),
         'type'        => 'radio-image',
@@ -145,8 +199,8 @@ function wootallyc_add_theme_option($custom_settings){
 	
 	$custom_settings['settings']['woocommerce_cat_sidebar_layout'] = array(
 		'id'          => 'woocommerce_cat_sidebar_layout',
-        'label'       => __('Default Sidebar Layout for Product Category Archive Page', 'tally_taxdomain'),
-        'desc'        => __('This is the global sidebar layout for WooCommerce Product Category Archive Pages.', 'tally_taxdomain'),
+        'label'       => __('Default Sidebar Layout for Product Category Archive Page', 'woocommerce_connect_for_tally'),
+        'desc'        => __('This is the global sidebar layout for WooCommerce Product Category Archive Pages.', 'woocommerce_connect_for_tally'),
         'std'         => tally_option_std('woocommerce_cat_sidebar_layout'),
         'type'        => 'radio-image',
         'section'     => 'woocommerce',
@@ -167,8 +221,8 @@ function wootallyc_add_theme_option($custom_settings){
 	
 	$custom_settings['settings']['woocommerce_tags_sidebar_layout'] = array(
 		'id'          => 'woocommerce_tags_sidebar_layout',
-        'label'       => __('Default Sidebar Layout for Product Tags Archive Page', 'tally_taxdomain'),
-        'desc'        => __('This is the global sidebar layout for WooCommerce Product Tags Archive Pages.', 'tally_taxdomain'),
+        'label'       => __('Default Sidebar Layout for Product Tags Archive Page', 'woocommerce_connect_for_tally'),
+        'desc'        => __('This is the global sidebar layout for WooCommerce Product Tags Archive Pages.', 'woocommerce_connect_for_tally'),
         'std'         => tally_option_std('woocommerce_tags_sidebar_layout'),
         'type'        => 'radio-image',
         'section'     => 'woocommerce',
@@ -189,8 +243,8 @@ function wootallyc_add_theme_option($custom_settings){
 	
 	$custom_settings['settings']['woocommerce_single_sidebar_layout'] = array(
 		'id'          => 'woocommerce_single_sidebar_layout',
-        'label'       => __('Default Sidebar Layout for Single Product Page', 'tally_taxdomain'),
-        'desc'        => __('This is the global sidebar layout for WooCommerce Single Product Page', 'tally_taxdomain'),
+        'label'       => __('Default Sidebar Layout for Single Product Page', 'woocommerce_connect_for_tally'),
+        'desc'        => __('This is the global sidebar layout for WooCommerce Single Product Page', 'woocommerce_connect_for_tally'),
         'std'         => tally_option_std('woocommerce_single_sidebar_layout'),
         'type'        => 'radio-image',
         'section'     => 'woocommerce',
@@ -205,6 +259,111 @@ function wootallyc_add_theme_option($custom_settings){
 			 array( 'label' => 'Sidebar - Content', 'value' => 'sidebar-content', 'src' => TALLY_URL.'/core/assets/images/admin/sc.gif'),
 			 array( 'label' => 'Sidebar - Content - Sidebar', 'value' => 'sidebar-content-sidebar', 'src' => TALLY_URL.'/core/assets/images/admin/scs.gif'),
 			 array( 'label' => 'Sidebar - Sidebar - Content', 'value' => 'sidebar-sidebar-content', 'src' => TALLY_URL.'/core/assets/images/admin/ssc.gif'),
+		)
+	);
+	
+	
+	$custom_settings['settings']['woocommerce_shop_page_porduct_column'] = array(
+		'id'          => 'woocommerce_shop_page_porduct_column',
+        'label'       => __('Shop Page Products Columns', 'woocommerce_connect_for_tally'),
+        'desc'        => '',
+        'std'         => tally_option_std('woocommerce_shop_page_porduct_column'),
+        'type'        => 'select',
+        'section'     => 'woocommerce',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'class'       => '',
+		'choices'     => array(
+			array( 'label' => '4 Column', 'value' => '4'),
+			array( 'label' => '1 Column', 'value' => '1'),
+			array( 'label' => '2 Column', 'value' => '2'),
+			array( 'label' => '3 Column', 'value' => '3'),
+			array( 'label' => '5 Column', 'value' => '5')
+		)
+	);
+	
+	
+	$custom_settings['settings']['woocommerce_cat_page_porduct_column'] = array(
+		'id'          => 'woocommerce_cat_page_porduct_column',
+        'label'       => __('Category Page Products Columns', 'woocommerce_connect_for_tally'),
+        'desc'        => '',
+        'std'         => tally_option_std('woocommerce_cat_page_porduct_column'),
+        'type'        => 'select',
+        'section'     => 'woocommerce',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'class'       => '',
+		'choices'     => array(
+			array( 'label' => '3 Column', 'value' => '3'),
+			array( 'label' => '1 Column', 'value' => '1'),
+			array( 'label' => '2 Column', 'value' => '2'),
+			array( 'label' => '4 Column', 'value' => '4'),
+			array( 'label' => '5 Column', 'value' => '5')
+		)
+	);
+	
+	
+	$custom_settings['settings']['woocommerce_tag_page_porduct_column'] = array(
+		'id'          => 'woocommerce_tag_page_porduct_column',
+        'label'       => __('Tags Page Products Columns', 'woocommerce_connect_for_tally'),
+        'desc'        => '',
+        'std'         => tally_option_std('woocommerce_tag_page_porduct_column'),
+        'type'        => 'select',
+        'section'     => 'woocommerce',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'class'       => '',
+		'choices'     => array(
+			array( 'label' => '3 Column', 'value' => '3'),
+			array( 'label' => '1 Column', 'value' => '1'),
+			array( 'label' => '2 Column', 'value' => '2'),
+			array( 'label' => '4 Column', 'value' => '4'),
+			array( 'label' => '5 Column', 'value' => '5')
+		)
+	);
+	
+	
+	$custom_settings['settings']['woocommerce_archive_page_porduct_column'] = array(
+		'id'          => 'woocommerce_archive_page_porduct_column',
+        'label'       => __('Archive Page Products Columns', 'woocommerce_connect_for_tally'),
+        'desc'        => '',
+        'std'         => tally_option_std('woocommerce_archive_page_porduct_column'),
+        'type'        => 'select',
+        'section'     => 'woocommerce',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'class'       => '',
+		'choices'     => array(
+			array( 'label' => '3 Column', 'value' => '3'),
+			array( 'label' => '1 Column', 'value' => '1'),
+			array( 'label' => '2 Column', 'value' => '2'),
+			array( 'label' => '4 Column', 'value' => '4'),
+			array( 'label' => '5 Column', 'value' => '5')
+		)
+	);
+	
+	
+	$custom_settings['settings']['woocommerce_related_porduct_column'] = array(
+		'id'          => 'woocommerce_related_porduct_column',
+        'label'       => __('Related Products Columns', 'woocommerce_connect_for_tally'),
+        'desc'        => '',
+        'std'         => tally_option_std('woocommerce_related_porduct_column'),
+        'type'        => 'select',
+        'section'     => 'woocommerce',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'class'       => '',
+		'choices'     => array(
+			array( 'label' => '4 Column', 'value' => '4'),
+			array( 'label' => '1 Column', 'value' => '1'),
+			array( 'label' => '2 Column', 'value' => '2'),
+			array( 'label' => '3 Column', 'value' => '3'),
+			array( 'label' => '5 Column', 'value' => '5')
 		)
 	);
 		
