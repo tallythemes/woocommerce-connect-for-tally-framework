@@ -3,8 +3,8 @@ Contributors: tallythemes
 Donate link: http://tallythemes.com/
 Tags: woocommerce, ecommerce, tallythemes, tally framework, woocommerce connect
 Requires at least: 3.8
-Tested up to: 3.9.1
-Stable tag: 1.2
+Tested up to: 4.0
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,8 +21,15 @@ Please see [http://tallythemes.com/how-to-install-wordpress-plugin/](http://tall
 
 
 == Changelog ==
+
+= 1.3 =
+* Improve CSS
+* Add aditional Theme Options
+
 = 1.2 =
 * Fix Sidebar: it was loading in all pages. Now it will load in Shop pages only.
+* Improve CSS
+* Add aditional Theme Options
 
 
 = 1.1 =
