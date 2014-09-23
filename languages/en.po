@@ -1,16 +1,84 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Woocommerce Connect For Tally Framework\n"
-"POT-Creation-Date: 2014-05-17 15:56+0600\n"
-"PO-Revision-Date: 2014-05-17 15:58+0600\n"
+"POT-Creation-Date: 2014-09-23 10:55+0600\n"
+"PO-Revision-Date: 2014-09-23 10:55+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.3\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: ..\n"
+
+#: ../woocommerce-connect-for-tally-framework.php:68
+msgid "Woo Shop Sidebar"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:70
+msgid "Woocommerce shop Sidebar Widgets"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:166
+msgid "WooCommerce Shop Sidebar Widget Area"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:180
+msgid "Default Sidebar Layout for Product Archive Page"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:181
+msgid ""
+"This is the global sidebar layout for WooCommerce Product Archive Pages."
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:202
+msgid "Default Sidebar Layout for Product Category Archive Page"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:203
+msgid ""
+"This is the global sidebar layout for WooCommerce Product Category Archive "
+"Pages."
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:224
+msgid "Default Sidebar Layout for Product Tags Archive Page"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:225
+msgid ""
+"This is the global sidebar layout for WooCommerce Product Tags Archive Pages."
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:246
+msgid "Default Sidebar Layout for Single Product Page"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:247
+msgid "This is the global sidebar layout for WooCommerce Single Product Page"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:268
+msgid "Shop Page Products Columns"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:289
+msgid "Category Page Products Columns"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:310
+msgid "Tags Page Products Columns"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:331
+msgid "Archive Page Products Columns"
+msgstr ""
+
+#: ../woocommerce-connect-for-tally-framework.php:352
+msgid "Related Products Columns"
+msgstr ""
