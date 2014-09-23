@@ -25,6 +25,8 @@ Please see [http://tallythemes.com/how-to-install-wordpress-plugin/](http://tall
 = 1.3 =
 * Improve CSS
 * Add aditional Theme Options
+* Update language .po file
+
 
 = 1.2 =
 * Fix Sidebar: it was loading in all pages. Now it will load in Shop pages only.
