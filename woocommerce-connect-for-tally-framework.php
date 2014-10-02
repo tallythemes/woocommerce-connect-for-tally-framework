@@ -5,7 +5,7 @@
  * Description: Add basic woocommercee templating and Style for  <strong> Tally Framework</strong>
  * Author:      TallyThemes
  * Author URI:  http://tallythemes.com/
- * Version:     1.3
+ * Version:     1.4
  * Text Domain: woocommerce_connect_for_tally
  * Domain Path: /languages/
  * Name Space: wootallyc
@@ -22,7 +22,7 @@ define('WOOTALLYC', 'Woocommerce Connect For Tally Framework' );
 define('WOOTALLYC_URL', site_url(str_replace( $path_abs, '', $path_dir )) );
 define('WOOTALLYC_DRI', $path_dir );
 define('WOOTALLYC_TEMPLATE', WOOTALLYC_DRI.'woocommerce' );
-define('WOOTALLYC_VERSION', 1.3 );
+define('WOOTALLYC_VERSION', 1.4 );
 
 
 /*
@@ -468,15 +468,15 @@ function wootallyc_template_loader( $template ) {
 }
 
 
-add_action('wp_head', 'wootallyc_show_page_content');
+add_action('tally_template_init', 'wootallyc_show_page_content');
 function wootallyc_show_page_content(){
 	/** Adding content to the pages */
 	if(is_single() && 'product' == get_post_type()){
-		remove_action('tally_loop', 'tally_do_loop_content');
+		remove_all_actions('tally_loop');
 		add_action('tally_loop', 'wootallyc_do_single_template_content');
 	}
 	elseif(is_post_type_archive( 'product' ) ||  is_page( get_option( 'woocommerce_shop_page_id' ) ) ){
-		remove_action('tally_loop', 'tally_do_loop_content');
+		remove_all_actions('tally_loop');
 		add_action('tally_loop', 'wootallyc_do_archive_template_content');
 	}
 	elseif(is_tax()){
@@ -486,7 +486,7 @@ function wootallyc_show_page_content(){
 		$taxonomies = get_object_taxonomies( 'product', 'names' );
 		
 		if ( in_array( $tax, $taxonomies ) ) {
-			remove_action('tally_loop', 'tally_do_loop_content');
+			remove_all_actions('tally_loop');
 			add_action('tally_loop', 'wootallyc_do_archive_template_content');
 		}
 	}	
