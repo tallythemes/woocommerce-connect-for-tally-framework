@@ -100,7 +100,9 @@ function wootallyc_init_load(){
 	add_action( 'woocommerce_after_single_product_summary', 'wootallyc_related_products', 20 );
 	
 	
-	
+	/* Update Product Colum by theme option --*/
+	add_filter('loop_shop_columns', 'wootallyc_loop_shop_columns');
+	add_filter('body_class', 'wootallyc_body_class_for_loop_shop_columns');
 }
 
 
@@ -142,6 +144,38 @@ function wootallyc_related_products(){
 		'columns'        => tally_option('woocommerce_related_porduct_column'), 
 	));
 	echo '</div>';
+}
+
+
+/*
+ Update Product Colum by theme option
+--------------------------------*/
+function wootallyc_loop_shop_columns($columns){
+	
+	global $woocommerce;
+	
+	if(is_post_type_archive('product')){
+		$columns = tally_option('woocommerce_archive_page_porduct_column', 4);
+	}elseif(is_tax('product_cat')){
+		$columns = tally_option('woocommerce_cat_page_porduct_column', 4);
+	}elseif(is_tax('product_tag')){
+		$columns = tally_option('woocommerce_tag_page_porduct_column', 4);
+	}
+	
+	return $columns;
+}
+
+function wootallyc_body_class_for_loop_shop_columns($class){
+	
+	if(is_post_type_archive('product')){
+		$class[] = 'columns-'.tally_option('woocommerce_archive_page_porduct_column', 4);
+	}elseif(is_tax('product_cat')){
+		$class[] = 'columns-'.tally_option('woocommerce_cat_page_porduct_column', 4);
+	}elseif(is_tax('product_tag')){
+		$class[] = 'columns-'.tally_option('woocommerce_tag_page_porduct_column', 4);
+	}
+	
+	return $class;	
 }
 
 
@@ -262,12 +296,11 @@ function wootallyc_add_theme_option($custom_settings){
 		)
 	);
 	
-	
-	$custom_settings['settings']['woocommerce_shop_page_porduct_column'] = array(
-		'id'          => 'woocommerce_shop_page_porduct_column',
-        'label'       => __('Shop Page Products Columns', 'woocommerce_connect_for_tally'),
+	$custom_settings['settings']['woocommerce_archive_page_porduct_column'] = array(
+		'id'          => 'woocommerce_archive_page_porduct_column',
+        'label'       => __('Archive Page Products Columns', 'woocommerce_connect_for_tally'),
         'desc'        => '',
-        'std'         => tally_option_std('woocommerce_shop_page_porduct_column'),
+        'std'         => tally_option_std('woocommerce_archive_page_porduct_column'),
         'type'        => 'select',
         'section'     => 'woocommerce',
         'rows'        => '',
@@ -275,14 +308,13 @@ function wootallyc_add_theme_option($custom_settings){
         'taxonomy'    => '',
         'class'       => '',
 		'choices'     => array(
-			array( 'label' => '4 Column', 'value' => '4'),
+			array( 'label' => '3 Column', 'value' => '3'),
 			array( 'label' => '1 Column', 'value' => '1'),
 			array( 'label' => '2 Column', 'value' => '2'),
-			array( 'label' => '3 Column', 'value' => '3'),
+			array( 'label' => '4 Column', 'value' => '4'),
 			array( 'label' => '5 Column', 'value' => '5')
 		)
 	);
-	
 	
 	$custom_settings['settings']['woocommerce_cat_page_porduct_column'] = array(
 		'id'          => 'woocommerce_cat_page_porduct_column',
@@ -310,27 +342,6 @@ function wootallyc_add_theme_option($custom_settings){
         'label'       => __('Tags Page Products Columns', 'woocommerce_connect_for_tally'),
         'desc'        => '',
         'std'         => tally_option_std('woocommerce_tag_page_porduct_column'),
-        'type'        => 'select',
-        'section'     => 'woocommerce',
-        'rows'        => '',
-        'post_type'   => '',
-        'taxonomy'    => '',
-        'class'       => '',
-		'choices'     => array(
-			array( 'label' => '3 Column', 'value' => '3'),
-			array( 'label' => '1 Column', 'value' => '1'),
-			array( 'label' => '2 Column', 'value' => '2'),
-			array( 'label' => '4 Column', 'value' => '4'),
-			array( 'label' => '5 Column', 'value' => '5')
-		)
-	);
-	
-	
-	$custom_settings['settings']['woocommerce_archive_page_porduct_column'] = array(
-		'id'          => 'woocommerce_archive_page_porduct_column',
-        'label'       => __('Archive Page Products Columns', 'woocommerce_connect_for_tally'),
-        'desc'        => '',
-        'std'         => tally_option_std('woocommerce_archive_page_porduct_column'),
         'type'        => 'select',
         'section'     => 'woocommerce',
         'rows'        => '',
