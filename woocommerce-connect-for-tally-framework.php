@@ -5,7 +5,7 @@
  * Description: Add basic woocommercee templating and Style for  <strong> Tally Framework</strong>
  * Author:      TallyThemes
  * Author URI:  http://tallythemes.com/
- * Version:     1.4
+ * Version:     1.5
  * Text Domain: woocommerce_connect_for_tally
  * Domain Path: /languages/
  * Name Space: wootallyc
@@ -22,7 +22,7 @@ define('WOOTALLYC', 'Woocommerce Connect For Tally Framework' );
 define('WOOTALLYC_URL', site_url(str_replace( $path_abs, '', $path_dir )) );
 define('WOOTALLYC_DRI', $path_dir );
 define('WOOTALLYC_TEMPLATE', WOOTALLYC_DRI.'woocommerce' );
-define('WOOTALLYC_VERSION', 1.4 );
+define('WOOTALLYC_VERSION', 1.5 );
 
 
 /*

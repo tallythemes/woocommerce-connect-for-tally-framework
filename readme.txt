@@ -4,7 +4,7 @@ Donate link: http://tallythemes.com/
 Tags: woocommerce, ecommerce, tallythemes, tally framework, woocommerce connect
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Please see [http://tallythemes.com/how-to-install-wordpress-plugin/](http://tall
 
 
 == Changelog ==
+
+= 1.5 =
+* Fix a Bug of the Columns controlling from Theme Options
 
 = 1.4 =
 * Fix a Bug with updated theme
